@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athletica App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ATHLETICA</h1>
+        </div>
+
+        <!-- Контентные секции -->
+        <div id="profile-section" class="section">
+            <div class="profile-photo">
+                <div class="photo-circle">ФОТО ПРОФИЛЯ</div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li>редактировать инфо</li>
+                    <li>посмотреть подписки</li>
+                    <li>посмотреть историю игр</li>
+                    <li>посмотреть мои отзывы</li>
+                    <li>изменить пароль</li>
+                    <li>уведомления</li>
+                    <li>выйти из аккаунта</li>
+                    <li>обратить в техподдержку</li>
+                    <li>создать запрос на создание спота</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="map-section" class="section" style="display: none;">
+            <div class="map">
+                <p>карта</p>
+            </div>
+            <div class="spot-info">
+                <h2>СПОТ</h2>
+                <div class="details">
+                    <span>адрес</span>
+                    <span>оценки</span>
+                </div>
+                <div class="slots">
+                    <h3>СЛОТЫ</h3>
+                    <span>18:00</span>
+                    <span>20:00</span>
+                    <span class="create-slot">создать свой слот</span>
+                </div>
+                <button class="subscribe-btn">подписаться на спот</button>
+            </div>
+        </div>
+
+        <div id="chat-section" class="section" style="display: none;">
+            <p>панель чатов</p>
+        </div>
+
+        <!-- Нижние навигационные кнопки -->
+        <div class="footer">
+            <div class="icon" onclick="showSection('chat-section')">💬</div>
+            <div class="icon" onclick="showSection('map-section')">📍</div>
+            <div class="icon" onclick="showSection('profile-section')">👤</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
