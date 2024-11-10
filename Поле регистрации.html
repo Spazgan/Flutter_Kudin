@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athletica Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2a3a5e;
+            color: white;
+        }
+        .container {
+            width: 300px;
+            text-align: center;
+            background-color: #2a3a5e;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #ff7847;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .link {
+            margin-top: 10px;
+            color: #cccccc;
+            font-size: 14px;
+            text-decoration: none;
+            display: block;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .footer-text {
+            font-size: 12px;
+            color: #cccccc;
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .checkbox-label {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">ATHLETICA<br>BASKETBALL</div>
+    
+    <!-- Форма входа -->
+    <form id="loginForm">
+        <input type="text" class="input-field" id="phoneEmail" placeholder="Номер телефона или Email" required>
+        <input type="password" class="input-field" id="password" placeholder="Пароль" required>
+        <button type="button" class="btn" onclick="login()">ВОЙТИ</button>
+        <a href="#" class="link" onclick="resetPassword()">восстановить пароль</a>
+    </form>
+
+    <!-- Форма регистрации -->
+    <form id="registerForm" class="hidden">
+        <input type="text" class="input-field" id="regPhoneEmail" placeholder="Номер телефона или Email" required>
+        <input type="password" class="input-field" id="regPassword" placeholder="Пароль" required>
+        <input type="password" class="input-field" id="confirmPassword" placeholder="Повторить пароль" required>
+        <div class="checkbox-label">
+            <input type="checkbox" id="dataAgreement" required>
+            <label for="dataAgreement">&nbsp;Согласие на обработку данных</label>
+        </div>
+        <button type="button" class="btn" onclick="registerUser()">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+    </form>
+
+    <!-- Ссылка для переключения форм -->
+    <a href="#" class="link" id="toggleRegisterLink" onclick="toggleRegister()">нет аккаунта? РЕГИСТРАЦИЯ</a>
+    
+    <div class="footer-text">МЕСТО, ГДЕ ИГРА ОБЪЕДИНЯЕТ</div>
+</div>
+
+<script>
+    function login() {
+        alert('Login button clicked');
+    }
+
+    function resetPassword() {
+        alert('Reset password link clicked');
+    }
+
+    function toggleRegister() {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const toggleLink = document.getElementById('toggleRegisterLink');
+        
+        if (registerForm.classList.contains('hidden')) {
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+            toggleLink.innerText = 'Уже есть аккаунт? ВОЙТИ';
+        } else {
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+            toggleLink.innerText = 'нет аккаунта? РЕГИСТРАЦИЯ';
+        }
+    }
+
+    function registerUser() {
+        const phoneEmail = document.getElementById('regPhoneEmail').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const dataAgreement = document.getElementById('dataAgreement').checked;
+
+        if (!dataAgreement) {
+            alert('Необходимо согласиться на обработку данных');
+            return;
+        }
+        if (password !== confirmPassword) {
+            alert('Пароли не совпадают');
+            return;
+        }
+        
+        alert('Регистрация завершена');
+    }
+</script>
+
+</body>
+</html>
