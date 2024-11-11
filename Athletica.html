@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athletica Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2a3a5e;
+            color: white;
+        }
+        .container {
+            width: 300px;
+            text-align: center;
+            background-color: #2a3a5e;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .logo {
+            font-family: 'Alfa Slab One', cursive;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #ff7847;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .link {
+            margin-top: 10px;
+            color: #cccccc;
+            font-size: 14px;
+            text-decoration: none;
+            display: block;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .footer-text {
+            font-size: 12px;
+            color: #cccccc;
+            margin-top: 20px;
+        }
+        .footer .icon img {
+             width: 24px;    
+            height: 24px;   
+             object-fit: contain;  
+        }               
+        .hidden {
+            display: none;
+        }
+        .checkbox-label {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            color: #cccccc;
+        }
+        /* Основной интерфейс приложения */
+        .app-container {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            background-color: #2a3a5e;
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #2a3a5e;
+            padding: 10px 0;
+            border-top: 1px solid #ffffff;
+        }
+        .icon {
+            font-size: 24px;
+            color: #ff7847;
+            cursor: pointer;
+        }
+        .section {
+            display: none;
+            padding: 20px;
+            height: calc(100vh - 60px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        #chat-section .chat-message {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #3b4a6b;
+            border-radius: 5px;
+            width: 80%;
+            text-align: center;
+        }
+        .map-placeholder {
+            width: 80%;
+            height: 80%;
+            background-color: #4b5a7e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 18px;
+            border-radius: 8px;
+        }
+        .profile-info {
+            text-align: center;
+        }
+        .profile-info h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .profile-info p {
+            font-size: 16px;
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="authContainer">
+    <div class="logo">ATHLETICA<br>BASKETBALL</div>
+    
+    <!-- Форма входа -->
+    <form id="loginForm">
+        <input type="text" class="input-field" id="phoneEmail" placeholder="номер телефона или Email" required>
+        <input type="password" class="input-field" id="password" placeholder="пароль" required>
+        <button type="button" class="btn" onclick="login()">ВОЙТИ</button>
+        <a href="#" class="link" onclick="resetPassword()">восстановить пароль</a>
+    </form>
+
+    <!-- Форма регистрации -->
+    <form id="registerForm" class="hidden">
+        <input type="text" class="input-field" id="name" placeholder="Имя" required>
+        <input type="text" class="input-field" id="regPhoneEmail" placeholder="номер телефона или Email" required>
+        <input type="password" class="input-field" id="regPassword" placeholder="пароль" required>
+        <input type="password" class="input-field" id="confirmPassword" placeholder="повторить пароль" required>
+        <div class="checkbox-label">
+            <input type="checkbox" id="dataAgreement" required>
+            <label for="dataAgreement">&nbsp;Согласие на обработку данных</label>
+        </div>
+        <button type="button" class="btn" onclick="registerUser()">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+    </form>
+
+    <!-- Ссылка для переключения форм -->
+    <a href="#" class="link" id="toggleRegisterLink" onclick="toggleRegister()">нет аккаунта? РЕГИСТРАЦИЯ</a>
+    
+    <div class="footer-text">МЕСТО, ГДЕ ИГРА ОБЪЕДИНЯЕТ</div>
+</div>
+
+<!-- Основной интерфейс приложения -->
+<div class="app-container" id="appContainer">
+    <!-- Раздел чатов -->
+    <div id="chat-section" class="section">
+        <div>
+            <div class="chat-message">Сообщение от друга</div>
+            <div class="chat-message">Добро пожаловать в Athletica!</div>
+            <div class="chat-message">Сегодня в 18:00 баскетбол на площадке у парка!</div>
+        </div>
+    </div>
+    
+    <!-- Раздел карты -->
+    <div id="map-section" class="section">
+        <div class="map-placeholder">Карта с расположением спортивных площадок</div>
+    </div>
+    
+    <!-- Раздел профиля -->
+    <div id="profile-section" class="section profile-info">
+        <div>
+            <h2>Имя пользователя</h2>
+            <p>Email: user@example.com</p>
+            <p>Любимая команда: Lakers</p>
+            <p>Уровень игры: Продвинутый</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="icon" onclick="showSection('chat-section')">
+            <img src="chat.png" alt="Чат" class="footer-icon">
+        </div>
+        <div class="icon" onclick="showSection('map-section')">
+            <img src="map.png" alt="Карта" class="footer-icon">
+        </div>
+        <div class="icon" onclick="showSection('profile-section')">
+            <img src="prof.png" alt="Профиль" class="footer-icon">
+        </div>
+    </div>
+    
+
+<script>
+    function login() {
+        document.getElementById('authContainer').style.display = 'none';
+        document.getElementById('appContainer').style.display = 'block';
+        showSection('chat-section'); // Показываем раздел чата по умолчанию
+    }
+
+    function resetPassword() {
+        alert('Reset password link clicked');
+    }
+
+    function toggleRegister() {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const toggleLink = document.getElementById('toggleRegisterLink');
+        
+        if (registerForm.classList.contains('hidden')) {
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+            toggleLink.innerText = 'Уже есть аккаунт? ВОЙТИ';
+        } else {
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+            toggleLink.innerText = 'нет аккаунта? РЕГИСТРАЦИЯ';
+        }
+    }
+
+    function registerUser() {
+        const name = document.getElementById('name').value;
+        const phoneEmail = document.getElementById('regPhoneEmail').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const dataAgreement = document.getElementById('dataAgreement').checked;
+
+        if (!dataAgreement) {
+            alert('Необходимо согласиться на обработку данных');
+            return;
+        }
+        if (password !== confirmPassword) {
+            alert('Пароли не совпадают');
+            return;
+        }
+        
+        alert('Регистрация завершена для ' + name);
+        document.getElementById('authContainer').style.display = 'none';
+        document.getElementById('appContainer').style.display = 'flex';
+        showSection('chat-section'); // Показываем раздел чата по умолчанию
+    }
+
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.style.display = 'none');
+        document.getElementById(sectionId).style.display = 'flex';
+    }
+</script>
+
+</body>
+</html>
